@@ -17,7 +17,9 @@ namespace NYTBestSellers
         {
             Container = new UnityContainer();
 
-            Container.RegisterInstance(new NytClient());
+            Container.RegisterInstance(typeof(NytClient));
+            Container.RegisterInstance(typeof(BestSellerRemoteDataSource));
+            Container.RegisterInstance(typeof(BestSellerRepository));
         }
     }
 }
