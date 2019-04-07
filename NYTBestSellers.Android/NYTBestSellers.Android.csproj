@@ -110,7 +110,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\NYTBestSellers\NYTBestSellers.csproj">
-      <Project>{BF705888-1817-458C-95FE-77B4071550FF}</Project>
+      <Project>{A9A8E844-A987-4566-B408-E9D366148141}</Project>
       <Name>NYTBestSellers</Name>
     </ProjectReference>
   </ItemGroup>
