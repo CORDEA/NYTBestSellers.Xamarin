@@ -1,13 +1,21 @@
-﻿using Unity;
+﻿using System.Reactive.Threading.Tasks;
+using Reactive.Bindings;
+using Unity;
 
 namespace NYTBestSellers
 {
     public class MainViewModel : IViewModel
     {
-        [Dependency] internal NytClient Client { get; set; }
+        [Dependency] internal BestSellerRepository Repository { get; set; }
 
-        public MainViewModel()
+        public ReadOnlyReactiveProperty<ListNamesResponse> Items { get; private set; }
+
+        [InjectionMethod]
+        internal void Initialize()
         {
+            Items = Repository.GetListNames()
+                .ToObservable()
+                .ToReadOnlyReactiveProperty();
         }
     }
 }
