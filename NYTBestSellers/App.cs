@@ -16,6 +16,8 @@ namespace NYTBestSellers
         private App()
         {
             Container = new UnityContainer();
+
+            Container.RegisterInstance(new NytClient());
         }
     }
 }

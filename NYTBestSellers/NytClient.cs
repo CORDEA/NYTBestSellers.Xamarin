@@ -6,7 +6,7 @@ using Newtonsoft.Json;
 
 namespace NYTBestSellers
 {
-    public class NytClient
+    internal class NytClient
     {
         private const string BaseUrl = "https://api.nytimes.com/svc/books/v3/";
         private const string GetListsPath = "lists.json";
