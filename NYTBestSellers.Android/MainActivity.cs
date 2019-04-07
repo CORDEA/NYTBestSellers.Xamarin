@@ -22,9 +22,6 @@ namespace NYTBestSellers.Android
             Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
 
-            FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
-            fab.Click += FabOnClick;
-
             var spinner = FindViewById<Spinner>(Resource.Id.spinner);
 
             ViewModel.Items
