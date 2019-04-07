@@ -15,7 +15,7 @@ namespace NYTBestSellers
         {
             Items = Repository.GetListNames()
                 .ToObservable()
-                .ToReadOnlyReactiveProperty();
+                .ToReadOnlyReactiveProperty(mode: ReactivePropertyMode.DistinctUntilChanged);
         }
     }
 }
