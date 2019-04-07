@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Android.Content;
 using Android.Runtime;
 using Android.Support.V7.Widget;
@@ -9,18 +10,22 @@ namespace NYTBestSellers.Android
     public class MainAdapter : RecyclerView.Adapter
     {
         private readonly Context _context;
+        private IList<MainListItemModel> _models;
 
         public MainAdapter(Context context)
         {
             _context = context;
         }
 
-        public void Update()
+        public void Update(IList<MainListItemModel> models)
         {
+            _models = models;
+            NotifyDataSetChanged();
         }
 
         public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
         {
+            var item = _models[position];
             var viewHolder = holder as ViewHolder;
         }
 
@@ -30,7 +35,7 @@ namespace NYTBestSellers.Android
                 .Inflate(Resource.Layout.list_item_main, parent, false));
         }
 
-        public override int ItemCount { get; }
+        public override int ItemCount => _models.Count;
 
         class ViewHolder : RecyclerView.ViewHolder
         {
