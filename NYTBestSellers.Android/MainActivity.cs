@@ -1,9 +1,13 @@
 ﻿using System;
+using System.Linq;
+using System.Reactive.Linq;
 using Android.App;
 using Android.OS;
 using Android.Support.Design.Widget;
-using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Widget;
+using Reactive.Bindings.Extensions;
+using Toolbar = Android.Support.V7.Widget.Toolbar;
 
 namespace NYTBestSellers.Android
 {
@@ -20,6 +24,20 @@ namespace NYTBestSellers.Android
 
             FloatingActionButton fab = FindViewById<FloatingActionButton>(Resource.Id.fab);
             fab.Click += FabOnClick;
+
+            var spinner = FindViewById<Spinner>(Resource.Id.spinner);
+
+            ViewModel.Items
+                .Select(response => response.Results.Select(result => result.EncodedName))
+                .ObserveOnUIDispatcher()
+                .Select(names =>
+                    new ArrayAdapter<string>(
+                        this,
+                        global::Android.Resource.Layout.SimpleSpinnerDropDownItem,
+                        names.ToList()
+                    )
+                )
+                .Subscribe(adapter => { spinner.Adapter = adapter; });
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
