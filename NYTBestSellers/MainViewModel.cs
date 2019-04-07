@@ -2,7 +2,7 @@
 
 namespace NYTBestSellers
 {
-    public class MainViewModel
+    public class MainViewModel : IViewModel
     {
         [Dependency] internal NytClient Client { get; set; }
 

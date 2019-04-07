@@ -1,18 +1,15 @@
 ﻿using System;
 using Android.App;
 using Android.OS;
-using Android.Runtime;
 using Android.Support.Design.Widget;
-using Android.Support.V7.App;
 using Android.Support.V7.Widget;
 using Android.Views;
 
 namespace NYTBestSellers.Android
 {
     [Activity(Label = "@string/app_name", Theme = "@style/AppTheme.NoActionBar", MainLauncher = true)]
-    public class MainActivity : AppCompatActivity
+    public class MainActivity : UnityActivity<MainViewModel>
     {
-
         protected override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -44,10 +41,9 @@ namespace NYTBestSellers.Android
 
         private void FabOnClick(object sender, EventArgs eventArgs)
         {
-            View view = (View)sender;
+            View view = (View) sender;
             Snackbar.Make(view, "Replace with your own action", Snackbar.LengthLong)
-                .SetAction("Action", (View.IOnClickListener)null).Show();
+                .SetAction("Action", (View.IOnClickListener) null).Show();
         }
     }
 }
-
