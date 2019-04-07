@@ -24,5 +24,7 @@ namespace NYTBestSellers
         [JsonProperty("dagger")] public int Dagger { get; private set; }
 
         [JsonProperty("amazon_product_url")] public string AmazonProductUrl { get; private set; }
+
+        [JsonProperty("book_details")] public ListBookDetailsResponse BookDetails { get; private set; }
     }
 }
