@@ -25,6 +25,10 @@ namespace NYTBestSellers
 
         [JsonProperty("amazon_product_url")] public string AmazonProductUrl { get; private set; }
 
-        [JsonProperty("book_details")] public ListBookDetailsResponse BookDetails { get; private set; }
+        [JsonProperty("isbns")] public ListIsbnResponse[] Isbns { get; private set; }
+
+        [JsonProperty("book_details")] public ListBookDetailResponse[] BookDetail { get; private set; }
+
+        [JsonProperty("reviews")] public ListReviewResponse[] Reviews { get; private set; }
     }
 }

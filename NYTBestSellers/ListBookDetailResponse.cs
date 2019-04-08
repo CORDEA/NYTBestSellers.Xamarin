@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 namespace NYTBestSellers
 {
     [JsonObject(ItemRequired = Required.Always)]
-    public class ListBookDetailsResponse
+    public class ListBookDetailResponse
     {
         [JsonProperty("title")] public string Title { get; private set; }
 
