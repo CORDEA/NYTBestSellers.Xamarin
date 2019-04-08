@@ -6,6 +6,7 @@ using Android.OS;
 using Android.Support.Design.Widget;
 using Android.Views;
 using Android.Widget;
+using Reactive.Bindings;
 using Reactive.Bindings.Extensions;
 using Toolbar = Android.Support.V7.Widget.Toolbar;
 
@@ -35,6 +36,10 @@ namespace NYTBestSellers.Android
                     )
                 )
                 .Subscribe(adapter => { spinner.Adapter = adapter; });
+
+            Observable.FromEventPattern<AdapterView.ItemSelectedEventArgs>(spinner, nameof(spinner.ItemSelected))
+                .Select(v => v.EventArgs.Parent.SelectedItem.ToString())
+                .SetCommand(ViewModel.OnItemSelected);
         }
 
         public override bool OnCreateOptionsMenu(IMenu menu)
