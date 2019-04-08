@@ -25,5 +25,12 @@ namespace NYTBestSellers
             var result = await _client.GetAsync(BuildUrl(GetListNamesPath, new Dictionary<string, string>()));
             return JsonConvert.DeserializeObject<ListNamesResponse>(await result.Content.ReadAsStringAsync());
         }
+
+        public async Task<ListsResponse> GetLists(string list)
+        {
+            var query = new Dictionary<string, string> {{"list", list}};
+            var result = await _client.GetAsync(BuildUrl(GetListsPath, query));
+            return JsonConvert.DeserializeObject<ListsResponse>(await result.Content.ReadAsStringAsync());
+        }
     }
 }

@@ -11,5 +11,10 @@ namespace NYTBestSellers
         {
             return await Client.GetListNames();
         }
+
+        public async Task<ListsResponse> GetLists(string list)
+        {
+            return await Client.GetLists(list);
+        }
     }
 }
