@@ -14,7 +14,7 @@
         android:maxLines="1"
         android:textColor="@color/colorPrimaryText"
         android:textSize="16sp"
-        app:layout_constraintBottom_toTopOf="@id/description"
+        app:layout_constraintBottom_toTopOf="@+id/description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintVertical_chainStyle="packed" />
