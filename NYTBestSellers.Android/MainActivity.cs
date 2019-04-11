@@ -4,6 +4,7 @@ using System.Reactive.Linq;
 using Android.App;
 using Android.OS;
 using Android.Support.Design.Widget;
+using Android.Support.V7.Widget;
 using Android.Views;
 using Android.Widget;
 using Reactive.Bindings;
@@ -24,6 +25,10 @@ namespace NYTBestSellers.Android
             SetSupportActionBar(toolbar);
 
             var spinner = FindViewById<Spinner>(Resource.Id.spinner);
+            var recyclerView = FindViewById<RecyclerView>(Resource.Id.recycler_view);
+            recyclerView.SetLayoutManager(new LinearLayoutManager(this));
+            var adapter = new MainAdapter(this);
+            recyclerView.SetAdapter(adapter);
 
             ViewModel.ListNameItems
                 .Select(response => response.Results.Select(result => result.EncodedName))
@@ -35,14 +40,16 @@ namespace NYTBestSellers.Android
                         names.ToList()
                     )
                 )
-                .Subscribe(adapter => { spinner.Adapter = adapter; });
+                .Subscribe(arrAdapter => { spinner.Adapter = arrAdapter; });
 
             ViewModel.ListItems
-                .Select(response => response.Results)
-                .Subscribe(items =>
-                {
-                    var item = items;
-                });
+                .Select(response =>
+                    response.Results.Select(result =>
+                        new MainListItemModel(result.DisplayName, result.BookDetail.First().Title)
+                    ).ToList()
+                )
+                .ObserveOnUIDispatcher()
+                .Subscribe(items => { adapter.Update(items); });
 
             Observable.FromEventPattern<AdapterView.ItemSelectedEventArgs>(spinner, nameof(spinner.ItemSelected))
                 .Select(v => v.EventArgs.Parent.SelectedItem.ToString())

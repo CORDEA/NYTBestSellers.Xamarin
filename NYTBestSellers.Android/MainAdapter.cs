@@ -10,7 +10,7 @@ namespace NYTBestSellers.Android
     public class MainAdapter : RecyclerView.Adapter
     {
         private readonly Context _context;
-        private IList<MainListItemModel> _models;
+        private IList<MainListItemModel> _models = new List<MainListItemModel>();
 
         public MainAdapter(Context context)
         {
