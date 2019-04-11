@@ -44,9 +44,10 @@ namespace NYTBestSellers.Android
 
             ViewModel.ListItems
                 .Select(response =>
-                    response.Results.Select(result =>
-                        new MainListItemModel(result.DisplayName, result.BookDetail.First().Title)
-                    ).ToList()
+                    response.Results
+                        .Select(result => result.BookDetail.First())
+                        .Select(detail => new MainListItemModel(detail.Title, detail.Description))
+                        .ToList()
                 )
                 .ObserveOnUIDispatcher()
                 .Subscribe(items => { adapter.Update(items); });
