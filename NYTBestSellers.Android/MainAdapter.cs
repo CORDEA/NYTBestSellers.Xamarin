@@ -4,6 +4,7 @@ using Android.Content;
 using Android.Runtime;
 using Android.Support.V7.Widget;
 using Android.Views;
+using Android.Widget;
 
 namespace NYTBestSellers.Android
 {
@@ -27,6 +28,8 @@ namespace NYTBestSellers.Android
         {
             var item = _models[position];
             var viewHolder = holder as ViewHolder;
+            viewHolder.Title.Text = item.Title;
+            viewHolder.Description.Text = item.Description;
         }
 
         public override RecyclerView.ViewHolder OnCreateViewHolder(ViewGroup parent, int viewType)
@@ -39,12 +42,18 @@ namespace NYTBestSellers.Android
 
         class ViewHolder : RecyclerView.ViewHolder
         {
+            public TextView Title { get; private set; }
+
+            public TextView Description { get; private set; }
+
             public ViewHolder(IntPtr javaReference, JniHandleOwnership transfer) : base(javaReference, transfer)
             {
             }
 
             public ViewHolder(View itemView) : base(itemView)
             {
+                Title = itemView.FindViewById<TextView>(Resource.Id.title);
+                Description = itemView.FindViewById<TextView>(Resource.Id.description);
             }
         }
     }
