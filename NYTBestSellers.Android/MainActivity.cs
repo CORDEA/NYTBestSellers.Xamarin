@@ -25,7 +25,7 @@ namespace NYTBestSellers.Android
 
             var spinner = FindViewById<Spinner>(Resource.Id.spinner);
 
-            ViewModel.Items
+            ViewModel.ListNameItems
                 .Select(response => response.Results.Select(result => result.EncodedName))
                 .ObserveOnUIDispatcher()
                 .Select(names =>
@@ -36,6 +36,13 @@ namespace NYTBestSellers.Android
                     )
                 )
                 .Subscribe(adapter => { spinner.Adapter = adapter; });
+
+            ViewModel.ListItems
+                .Select(response => response.Results)
+                .Subscribe(items =>
+                {
+                    var item = items;
+                });
 
             Observable.FromEventPattern<AdapterView.ItemSelectedEventArgs>(spinner, nameof(spinner.ItemSelected))
                 .Select(v => v.EventArgs.Parent.SelectedItem.ToString())
