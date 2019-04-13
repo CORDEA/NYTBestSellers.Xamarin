@@ -15,7 +15,7 @@ namespace NYTBestSellers.Android
         {
             base.OnCreate();
 
-            App.Initialize();
+            App.Initialize(new MainNavigator(this));
         }
     }
 }

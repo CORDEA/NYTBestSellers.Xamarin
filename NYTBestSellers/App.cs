@@ -8,12 +8,12 @@ namespace NYTBestSellers
 
         public IUnityContainer Container { get; }
 
-        public static void Initialize()
+        public static void Initialize(IMainNavigator navigator)
         {
-            Current = new App();
+            Current = new App(navigator);
         }
 
-        private App()
+        private App(IMainNavigator navigator)
         {
             Container = new UnityContainer();
 
@@ -24,6 +24,7 @@ namespace NYTBestSellers
             Container.RegisterInstance(typeof(ListsRemoteDataSource));
             Container.RegisterInstance(typeof(ListsLocalDataSource));
             Container.RegisterInstance(typeof(ListsRepository));
+            Container.RegisterInstance(navigator);
         }
     }
 }
