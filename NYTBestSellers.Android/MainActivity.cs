@@ -54,6 +54,10 @@ namespace NYTBestSellers.Android
 
             Observable.FromEventPattern<AdapterView.ItemSelectedEventArgs>(spinner, nameof(spinner.ItemSelected))
                 .Select(v => v.EventArgs.Parent.SelectedItem.ToString())
+                .SetCommand(ViewModel.OnSpinnerItemSelected);
+
+            Observable.FromEventPattern<MainAdapter.ItemSelectedEventArgs>(adapter, nameof(adapter.ItemSelected))
+                .Select(v => v.EventArgs.Position)
                 .SetCommand(ViewModel.OnItemSelected);
         }
 

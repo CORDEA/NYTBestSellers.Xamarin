@@ -14,7 +14,9 @@ namespace NYTBestSellers
 
         public ReadOnlyReactiveProperty<ListsResponse> ListItems { get; private set; }
 
-        public readonly ReactiveCommand<string> OnItemSelected = new ReactiveCommand<string>();
+        public readonly ReactiveCommand<string> OnSpinnerItemSelected = new ReactiveCommand<string>();
+
+        public readonly ReactiveCommand<int> OnItemSelected = new ReactiveCommand<int>();
 
         [InjectionMethod]
         internal void Initialize()
@@ -23,7 +25,7 @@ namespace NYTBestSellers
                 .ToObservable()
                 .ToReadOnlyReactiveProperty(mode: ReactivePropertyMode.DistinctUntilChanged);
 
-            ListItems = OnItemSelected
+            ListItems = OnSpinnerItemSelected
                 .SelectMany(list => ListsRepository.Get(list).ToObservable())
                 .ToReadOnlyReactiveProperty(mode: ReactivePropertyMode.DistinctUntilChanged);
         }
