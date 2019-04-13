@@ -19,8 +19,10 @@ namespace NYTBestSellers
 
             Container.RegisterInstance(typeof(NytClient));
             Container.RegisterInstance(typeof(ListNamesRemoteDataSource));
+            Container.RegisterInstance(typeof(ListNamesLocalDataSource));
             Container.RegisterInstance(typeof(ListNamesRepository));
             Container.RegisterInstance(typeof(ListsRemoteDataSource));
+            Container.RegisterInstance(typeof(ListsLocalDataSource));
             Container.RegisterInstance(typeof(ListsRepository));
         }
     }
