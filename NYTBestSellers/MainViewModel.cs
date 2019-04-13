@@ -7,7 +7,8 @@ namespace NYTBestSellers
 {
     public class MainViewModel : IViewModel
     {
-        [Dependency] internal BestSellerRepository Repository { get; set; }
+        [Dependency] internal ListNamesRepository ListNamesRepository { get; set; }
+        [Dependency] internal ListsRepository ListsRepository { get; set; }
 
         public ReadOnlyReactiveProperty<ListNamesResponse> ListNameItems { get; private set; }
 
@@ -18,12 +19,12 @@ namespace NYTBestSellers
         [InjectionMethod]
         internal void Initialize()
         {
-            ListNameItems = Repository.GetListNames()
+            ListNameItems = ListNamesRepository.Get()
                 .ToObservable()
                 .ToReadOnlyReactiveProperty(mode: ReactivePropertyMode.DistinctUntilChanged);
 
             ListItems = OnItemSelected
-                .SelectMany(list => Repository.GetLists(list).ToObservable())
+                .SelectMany(list => ListsRepository.Get(list).ToObservable())
                 .ToReadOnlyReactiveProperty(mode: ReactivePropertyMode.DistinctUntilChanged);
         }
     }
