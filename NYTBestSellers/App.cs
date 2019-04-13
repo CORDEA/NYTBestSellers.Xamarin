@@ -1,4 +1,5 @@
 ﻿using Unity;
+using Unity.Lifetime;
 
 namespace NYTBestSellers
 {
@@ -17,13 +18,13 @@ namespace NYTBestSellers
         {
             Container = new UnityContainer();
 
-            Container.RegisterInstance(typeof(NytClient));
-            Container.RegisterInstance(typeof(ListNamesRemoteDataSource));
-            Container.RegisterInstance(typeof(ListNamesLocalDataSource));
-            Container.RegisterInstance(typeof(ListNamesRepository));
-            Container.RegisterInstance(typeof(ListsRemoteDataSource));
-            Container.RegisterInstance(typeof(ListsLocalDataSource));
-            Container.RegisterInstance(typeof(ListsRepository));
+            Container.RegisterType<NytClient>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ListNamesRemoteDataSource>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ListNamesLocalDataSource>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ListNamesRepository>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ListsRemoteDataSource>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ListsLocalDataSource>(new ContainerControlledLifetimeManager());
+            Container.RegisterType<ListsRepository>(new ContainerControlledLifetimeManager());
             Container.RegisterInstance(navigator);
         }
     }
